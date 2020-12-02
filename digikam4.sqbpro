@@ -12,7 +12,7 @@ insert into Tags SELECT DISTINCT NULL,71,name,NULL,NULL FROM PSE.tag_table as PS
  inner join PSE.tag_to_media_table as tm on m.id = tm.media_id
  inner join PSE.tag_table as t on t.id = tm.tag_id
  inner join Tags as nt on nt.name = t.name
- inner join Images as im on im.name = m.filename_search_index
+ inner join Images as im on im.name = upper( m.filename_search_index )
  where not exists( select tagid from ImageTags as it where imageid = im.id and tagid = nt.id)  
  
 -- select im.id, nt.id, filename_search_index, t.name from PSE.media_table as m</sql><sql name="SQL 5">UPDATE ImageInformation
@@ -37,4 +37,4 @@ UPDATE ImageInformation
                  where ImageInformation.imageid = image_ratings.imageid )
   where exists( select rating from image_ratings
                  where ImageInformation.imageid = image_ratings.imageid );				 
-	</sql><current_tab id="4"/></tab_sql></sqlb_project>
+	</sql><current_tab id="1"/></tab_sql></sqlb_project>
